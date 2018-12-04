@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8">
+    <title>{$page.post_title}</title>
+    <meta name="keywords" content="{$site_info.site_seo_keywords|default=''}"/>
+    <meta name="description" content="{$site_info.site_seo_description|default=''}">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<include file="public@head"/>
+<script src="//api.map.baidu.com/api?v=1.3"></script>
+</head><body>
+   
+
+<include file="public@nav"/>
+
+<div id="mindex" data-options-ease="Expo.easeInOut" data-options-speed="1" data-options-sscreen="0"></div><div id="xactive" class="hide">{$page.post_title}</div>
+<div id="sitecontent">
+
+
+
+<div class="npagePage " id="npagePage">
+<neq name="page.bann" value=""><div id="banner">
+    <div style="background-image:url({:cmf_get_image_url($page.bann)});"></div>
+</div></neq>
+  <div class="content" style=" margin-bottom:60px">
+<div id="mianbao">您的位置：<a href="/">首页</a><span id="wz"></span> </div>
+ <div class="header" id="plheader">
+
+      <p class="title">{$page.post_title}</p>
+
+            <p class="subtitle">{$page.post_excerpt}</p>
+
+      </div>
+    
+<div class="fw postbody" id="postbody" style="font-size:16px;">{$page.post_content}<div class="ainfo">
+                <hr>
+            <div id="mapCanvas" class="map-canvas no-margin mtop_2" style="height: 450px;">
+        <php>
+            $company_location=empty($theme_vars['company_location'])?'113.380593,22.984198':$theme_vars['company_location'];
+            $company_location=explode(',',$company_location);
+            $company_location_lng=$company_location[0];
+            $company_location_lat=$company_location[1];
+        </php>
+        <script type="text/javascript">
+            var map   = new BMap.Map("mapCanvas"); // 创建Map实例
+            var point = new BMap.Point("{$company_location_lng}", "{$company_location_lat}"); // 创建点坐标
+            map.centerAndZoom(point, 15); // 初始化地图,设置中心点坐标和地图级别。
+            //map.enableScrollWheelZoom(); //启用滚轮放大缩小
+            //添加缩放控件
+            map.addControl(new BMap.NavigationControl());
+            map.addControl(new BMap.ScaleControl());
+            map.addControl(new BMap.OverviewMapControl());
+
+            var marker = new BMap.Marker(point); // 创建标注
+            map.addOverlay(marker); // 将标注添加到地图中
+            var infoWindow = new BMap.InfoWindow("{$theme_vars.baidu_map_info_window_text|htmlspecialchars_decode|default=''}"); // 创建信息窗口对象
+            marker.openInfoWindow(infoWindow);
+        </script>
+    </div></div></div>
+    
+
+  </div>
+
+</div>
+
+</div>
+<include file="public@footer"/><include file="public@scripts"/><script>
+$(function(){
+	xactive=$("#xactive").text();
+	$("#"+xactive).addClass("active");
+	$("#"+xactive).parent().addClass("active");
+	tx=$("#"+xactive).attr("data-class");
+	$("#"+tx).addClass("active");
+	if(tx){
+$("#wz").html(" - <a>"+tx+"</a> - <a>"+xactive+"</a>")
+$(".wz").html(tx)
+	}else{
+$("#wz").html(" - <a>"+xactive+"</a>")
+$(".wz").html(tx)
+		}
+	znav=$("#"+tx).parent().find("ul").html();
+	$("#category").html(znav);
+	$("#category").find(".fa-angle-right").remove();
+	$("#category").find("#"+xactive).parent().addClass("active");;
+	});</script></body></html>

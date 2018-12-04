@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+ <title>{$category.name}</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="keywords" content="{$site_info.site_seo_keywords|default=''}"/>
+    <meta name="description" content="{$site_info.site_seo_description|default=''}">
+<include file="public@head"/>
+
+</head><body><div id="xactive" class="hide">{$category.name}</div><div id="sitecontent" class="transform"><include file="public@nav"/>
+
+<div class="scrollView"><div class="npagePage">
+  <div class="content">
+<div id="item">{$category.name}</div>
+<div id="newslist"> 
+  <php>
+                    $where=[
+                    'post.create_time'=>['egt',0]
+                    ];
+                    $page=[
+                        'list_rows'=>9,
+                        'next'=>'&nbsp;<i class="fa fa-angle-right"></i>',
+                        'prev'=>'<i class="fa fa-angle-left"></i>&nbsp;'
+                    ];
+                    $p=0;
+          </php>     
+       <portal:articles item="vo" where="$where" order="post.published_time DESC" page="$page"
+                                 relation="categories"
+                                 categoryIds="$category.id"
+                                 returnVarName="articles_data">
+<div class="newstitem plr10 wow fadeIn"><a class="newsinfo" href="{:cmf_url('portal/Article/index',array('id'=>$vo['id'],'cid'=>$category['id']))}">
+
+<neq name="vo.more.thumbnail" value=""><div class="newsimage"><img src="{:cmf_get_image_url($vo.more.thumbnail)}" width="auto" height="auto"/></div></neq>
+
+        <div class="newsdate">
+
+          <p class="md">{$vo.published_time|date='m-d',###}</p>
+
+          <p class="year">{$vo.published_time|date='Y',###}</p>
+
+        </div>
+
+        <div class="newsbody">
+
+          <p class="title ellipsis">{$vo.post_title}</p>
+
+          <p class="description">{$vo.post_excerpt}</p>
+
+        </div>
+
+        </a></div>
+        <php>$p++;</php>
+</portal:articles>
+      </div>
+<div id="pages"><page/></div>
+
+</div></div></div>
+<include file="public@footer"/>
+</div>
+<include file="public@scripts"/>
+<script>
+$(function(){
+	xactive=$("#xactive").text();
+	$("#"+xactive).addClass("active");
+	//$("#"+xactive).parent().show();
+	$("#"+xactive).parent().height("100%");
+	tx=$("#"+xactive).attr("data-class");
+	$("#"+tx).addClass("active");
+	$("#"+tx).parent().addClass("active");
+
+	});</script></body></html>
+

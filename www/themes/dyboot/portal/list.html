@@ -1,0 +1,114 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+ <title>{$category.name},{$site_info.site_name|default=''}</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="keywords" content="{$site_info.site_seo_keywords|default=''}"/>
+    <meta name="description" content="{$site_info.site_seo_description|default=''}">
+<include file="public@head"/>
+
+</head><body >
+
+<div class="bodyMask"> </div>
+<include file="public@nav"/>
+<div id="mindex" data-options-ease="Expo.easeInOut" data-options-speed="1" data-options-sscreen="0"></div><div id="xactive" class="hide">{$category.name}</div>
+<div id="sitecontent">
+
+
+
+<div id="newsPage" class="npagePage Pagenews"> <neq name="category.more.thumbnail" value=""><div id="banner">
+    <div style="background-image:url({:cmf_get_image_url($category.more.thumbnail)});"></div>
+</div></neq>
+    <div class="content">
+<div id="mianbao">您的位置：<a href="/">首页</a><span id="wz"></span> </div>
+        <div id="newslist">
+
+<div class="header">
+
+      <p class="title wz">{$category.name}</p>
+
+            <p class="subtitle">{$category.description}</p>
+
+      </div>
+      <ul id="category" style="margin-top:-30px;">
+          </ul>
+      <div class="wrapper">        
+ <php>
+                    $where=[
+                    'post.create_time'=>['egt',0]
+                    ];
+                    $page=[
+                        'list_rows'=>9,
+                        'next'=>'&nbsp;<i class="fa fa-angle-right"></i>',
+                        'prev'=>'<i class="fa fa-angle-left"></i>&nbsp;'
+                    ];
+                    $p=0;
+                </php>     
+       <portal:articles item="vo" where="$where" order="post.published_time DESC" page="$page"
+                                 relation="categories"
+                                 categoryIds="$category.id"
+                                 returnVarName="articles_data">
+      <div id="newsitem_{$p}" class="wow newstitem left"><a class="newscontent"  target="_blank" href="{:cmf_url('portal/Article/index',array('id'=>$vo['id'],'cid'=>$category['id']))}">
+       <neq name="vo.more.thumbnail" value="">
+      <div class="news_wrapper">
+
+            <div class="newsbody">
+
+           <p class="date"><span class="md">{$vo.published_time|date='Y',###}<span>-</span></span><span class="year">{$vo.published_time|date='m-d',###}</span></p>
+
+              <p class="title">{$vo.post_title}</p>
+              <p class="description">{$vo.post_excerpt} </p>
+
+            </div>
+
+          </div>
+
+          <div class="newsimg" style="background-image:url({:cmf_get_image_url($vo.more.thumbnail)})"></div>
+
+              <else /><span class="title" style="font-size:15px;">{$vo.post_title}<span style="padding: 0px; margin: 0px; color: rgb(165, 165, 165);">&nbsp;&nbsp;&nbsp;&nbsp; --→</span></span><br><br>
+              <span style="font-size:13px;" >{$vo.post_excerpt}</span>
+          </neq>
+
+          </a>
+
+         
+          </div>
+<php>$p++;</php>
+</portal:articles>
+
+        </div>
+
+    </div>
+
+    <div class="clear"></div>
+    <div id="pages"><page/></div>
+
+  </div>
+
+</div>
+
+</div>
+<include file="public@footer"/><include file="public@scripts"/><script>
+$(function(){
+	xactive=$("#xactive").text();
+	$("#"+xactive).addClass("active");
+	tx=$("#"+xactive).attr("data-class");
+	$("#"+tx).addClass("active");
+	$("#"+tx).parent().addClass("active");
+	if(tx){
+$("#wz").html(" - <a>"+tx+"</a> - <a>"+xactive+"</a>")
+$(".wz").html(tx)
+	}else{
+$("#wz").html(" - <a>"+xactive+"</a>")
+$(".wz").html(tx)
+		}
+	znav=$("#"+tx).parent().find("ul").html();
+	$("#category").html(znav);
+	$("#category").find(".fa-angle-right").remove();
+	$("#category").find("#"+xactive).parent().addClass("active");;
+	});</script></body></html>

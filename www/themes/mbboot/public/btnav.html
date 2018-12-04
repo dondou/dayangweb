@@ -1,0 +1,35 @@
+<div id="mcontact" class="module" style="padding-bottom:50px;">
+
+    <div class="bgmask"></div>
+
+  <div class="content">
+
+   
+<div id="contactlist" class="fw">
+      <div id="contactinfo" class="fl wow" data-wow-delay=".2s">
+ <volist name="nav" id="item" key="p">
+  <php>$subnav=get_nav(1,$item["id"]); </php> 
+  <neq name="subnav" value="x">   
+ <lt name="p" value='7'>
+<div class="bok"><h3 class=" name">{$item.name}</h3><br><a></a>
+<volist name="subnav" id="zitem"><a href="{$zitem.href|default=''}" target="_self">{$zitem.name}</a></volist>
+</div></lt></neq>
+</volist>
+<div class="bok" style="margin-left:50px; ">
+<h3 style="color:#163f7e; font-size:30px;">400-8868-990</h3>
+
+        <p >地址：广州市番禺区番禺大道北555号天安总部中心23号楼6楼（511400）<br>电话：020-38258775<br>传真：020-38258371<br>邮箱：dy@itdayang.com</p>
+
+      </div>
+
+        
+
+      </div>
+
+      
+
+    </div>
+
+  </div>
+
+</div>

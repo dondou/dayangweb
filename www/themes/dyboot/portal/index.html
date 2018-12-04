@@ -1,0 +1,412 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+ <title>{$site_info.site_name|default=''}</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="keywords" content="{$site_info.site_seo_keywords|default=''}"/>
+    <meta name="description" content="{$site_info.site_seo_description|default=''}">
+<include file="public@head"/>
+
+</head><body >
+
+
+<include file="public@nav"/>
+<php>$rs=get_one('post_excerpt,more','portal_post','id',148,'','');
+$m=json_decode($rs['more'],true);
+</php>
+<neq name="rs.post_excerpt" value="">
+<div class="home-container">
+
+                <div class="video-section">
+
+                    <video id="home-bg-video" class="full-element background-video" preload="auto" muted="" autoplay="" loop="" data-reactid=".2">
+
+                        <source src="{$rs.post_excerpt}" data-reactid=".2.0">
+
+                    </video>
+                </div>
+</div></neq>
+
+<div id="sitecontent" style="background-color:#fff">
+<neq name="rs.post_excerpt" value="">
+<div id="vd"><div class="more">
+                <a></a>
+            </div></div></neq>
+<div id="indexPage" style="background-color:#fff" >
+  <php>$top_slide_id=empty($theme_vars['top_slide'])?1:$theme_vars['top_slide'];</php>
+
+
+<div id="mslider" class="module" style="background-color:#fff" ><script type="text/javascript">$(function(){$("#mslider li video").each(function(index, element) {element.play();});})</script><ul class="slider"  data-options-auto="1" data-options-mode="0" data-options-pause="5" data-options-ease="ease-out">
+<slides id="$top_slide_id"><li style="background-image:url({:cmf_get_image_url($vo.image)}); "  ><img style="display:none0;" src="{:cmf_get_image_url($vo.image)}" alt=""/><div class="mask"></div><a  href="{$vo.url|default=''}" target="_blank" ><div><p class="title ellipsis"></p></div><div class="sliderArrow fa fa-angle-down"></div></a></li></slides>
+</ul></div><div id="mindex" data-options-ease="Expo.easeInOut" data-options-speed="1" data-options-sscreen="0"></div>
+
+<div id="mnews" class="module" style="background-color:#f2f2f2;">
+
+    <div class="bgmask"></div>
+
+  <div class="content layoutnone">
+
+    <div class="header wow">
+<php>$rs=get_one('name,description','portal_category','id',5,'','');</php>
+      <p class="title">{$rs.name}</p>
+            <p class="subtitle">{$rs.description}</p>
+
+      </div>
+
+    <div class="module-content" id="newslist">
+
+      <div class="wrapper">
+
+        <ul class="content_list" data-options-sliders="5" data-options-margin="0" data-options-ease="u65e0" data-options-speed="0"  data-options-mode="horizontal" data-options-wheel="0">
+<php>
+                    $where=[
+                    'post.create_time'=>['egt',0]
+                    ];
+                    $p=0;
+              </php>     
+       <portal:articles limit="5" item="vo" where="$where" order="post.published_time DESC"
+                                 relation="categories"
+                                 categoryIds="21,22"
+                                 returnVarName="articles_data">
+                    <li id="newsitem_{$p}" class="wow newstitem left"><a class="newscontent" target="_blank" href="{:cmf_url('portal/Article/index',array('id'=>$vo.id,'cid'=>$vo.category_id))}">
+
+            <div class="news_wrapper" style="background-color:#f2f2f2;">
+
+              <div class="newsbody">
+
+                <p class="date"><span class="md">{$vo.published_time|date='Y',###}<span>-</span></span><span class="year">{$vo.published_time|date='m-d',###}</span></p>
+
+                <p class="title">{$vo.post_title}</p>
+                <p class="description">{$vo.post_excerpt}</p>
+
+              </div>
+
+            </div>
+
+            <div class="newsimg" style="background-image:url({:cmf_get_image_url($vo.more.thumbnail)})"></div>
+
+            </a>
+
+
+            </li>
+<php>$p++;</php>
+</portal:articles>
+        </ul>
+
+      </div>
+
+    </div>
+
+    <div class="clear"></div>
+
+    <a href="/news_1" class="more wow">MORE<i class="fa fa-angle-right"></i></a>
+
+    <div style="height:0">&nbsp;</div>
+
+  </div>
+
+</div>
+<div id="mservice" class="module">
+
+    <div class="bgmask"></div>
+
+  <div class="content layoutslider">
+
+    <div class="header wow fw" data-wow-delay=".1s" >
+
+<php>$rs=get_one('name,description','portal_category','id',15,'','');</php>
+      <p class="title">{$rs.name}</p>
+            <p class="subtitle">{$rs.description}</p>
+
+      </div>
+
+    <div class="module-content fw" id="servicelist">
+
+      <div class="wrapper">
+
+        <ul class="content_list" data-options-sliders="3" data-options-margin="50" data-options-ease="u65e0" data-options-speed="0">
+<php>
+                    $where=[
+                    'post.create_time'=>['egt',0]
+                    ];
+                    $p=0;
+              </php>     
+       <portal:articles limit="3" item="vo" where="$where" order="post.published_time DESC"
+                                 relation="categories"
+                                 categoryIds="15"
+                                 returnVarName="articles_data">
+                    <li id="serviceitem_{$p}" class="serviceitem wow"><a href="{:cmf_url('portal/Article/index',array('id'=>$vo.id,'cid'=>$vo.category_id))}" target="_blank">
+
+          	<p class="service_img"><img src="{:cmf_get_image_url($vo.more.thumbnail)}" alt="{$vo.post_title}"/></p>
+
+            <div class="service_info">
+                <p class="title">{$vo.post_title}</p>
+                <p class="description">{$vo.post_excerpt}</p>
+            </div>
+
+            </a>
+
+
+            </li><php>$p++;</php>
+</portal:articles>
+        </ul>
+
+      </div>
+
+    </div>
+
+    <div class="clear"></div>
+
+  </div>
+
+</div>
+<div id="mproject" class="module" style="background-color:#f2f2f2;">
+
+     <div class="bgmask"></div>
+
+   <div class="content layoutslider">
+
+       <div class="header wow">
+<php>$rs=get_one('name,description','portal_category','id',6,'','');</php>
+      <p class="title">{$rs.name}</p>
+            <p class="subtitle">{$rs.description}</p>
+       </div>
+
+              <div id="category" class="hide wow">
+        </div>
+
+              <!--yyLayout masonry-->
+
+       <div class="module-content" id="projectlist">
+
+                                 <div class="projectSubList" id="projectSubList_">
+
+               <div class="projectSubHeader">
+
+                   <p class="title"></p>
+
+                   <p class="subtitle"></p>
+
+               </div>
+
+               <div class="wrapper">
+
+                 <ul class="content_list" data-options-sliders="5" data-options-margin="20" data-options-ease="u65e0" data-options-speed="0">
+<php>
+                    $where=[
+                    'post.create_time'=>['egt',0]
+                    ];
+                    $p=0;
+                </php>     
+       <portal:articles limit="5" item="vo" where="$where" order="post.published_time DESC"
+                                 relation="categories"
+                                 categoryIds="6"
+                                 returnVarName="articles_data">
+                                      <li id="projectitem_0" class="projectitem wow">
+
+                     <a href="{:cmf_url('portal/Article/index',array('id'=>$vo.id,'cid'=>$vo.category_id))}" class="projectitem_content" target="_blank">
+
+                        <div class="projectitem_wrapper">
+
+                            <div class="project_img"><img src="{:cmf_get_image_url($vo.more.thumbnail)}" alt="{$vo.post_title}" /></div>
+
+                            <div class="project_info">
+
+                               <div>
+
+                                  <p class="title">{$vo.post_title}</p>
+                <p class="subtitle">{$vo.post_excerpt}</p>
+
+                               </div>
+
+                            </div>
+
+                        </div>
+
+                      </a>
+
+                   </li><php>$p++;</php>
+</portal:articles>
+                 </ul>
+
+              </div><!--wrapper-->
+
+            </div><!--projectSubList-->            
+
+   
+        </div>
+
+       <!--projectlist-->
+
+       <div class="clear"></div>
+
+   </div>
+
+</div>
+<div id="mpage" class="module">
+
+    <div class="bgmask"></div>
+
+  <div class="content">
+
+    <div class="module-content">
+
+      <div class="wrapper">
+
+        <ul class="slider one">
+
+                    <li>
+
+            <div class="header wow" data-wow-delay=".2s">
+
+<php>$rs=get_one('post_title,post_keywords,post_excerpt,more','portal_post','id',144,'','');
+$m=json_decode($rs['more'],true);
+</php>
+      <p class="title">{$rs.post_title}</p>
+
+              </div>
+
+            <div class="des-wrap">
+
+              <p class="description wow" data-wow-delay=".3s">{$rs.post_excerpt}</p>
+
+            </div>
+
+            <a href="/about/50.html" class="more wow" data-wow-delay=".5s">MORE<i class="fa fa-angle-right"></i></a>            <div class="fimg wow" style="background-image:url({:cmf_get_image_url($m.thumbnail)})"></div>
+
+            </li>
+
+            </ul>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<!--project-->
+<div id="mteam" class="module">
+
+    <div class="bgmask"></div>
+
+  <div class="content layoutslider">
+
+    <div class="header wow">
+<php>$rs=get_one('name,description','portal_category','id',24,'','');</php>
+      <p class="title">{$rs.name}</p>
+            <p class="subtitle">{$rs.description}</p>
+
+      </div>
+
+    <div class="module-content fw">
+
+      <div class="wrapper">
+
+        <ul class="content_list" data-options-sliders="1" data-options-margin="0" data-options-ease="u65e0" data-options-speed="0">
+        <portal:articles limit="5" item="vo" where="$where" order="post.published_time DESC"
+                                 relation="categories"
+                                 categoryIds="24"
+                                 returnVarName="articles_data">
+          <li id="teamitem_{$p}"  class="wow">
+            
+            <div class="header wow" data-wow-delay=".2s"><a ><img src="{:cmf_get_image_url($vo.more.thumbnail)}" alt="{$vo.post_title}" style="background-color:#fff;" /></a></div>
+            
+            <div class="summary wow">
+              
+              <p class="title"><a>{$vo.post_title}</a></p>
+                <p class="subtitle">{$vo.post_content}</p>
+
+              
+              </div>
+            
+        
+            
+          </li><php>$p++;</php>
+</portal:articles>
+        </ul>
+
+      </div>
+
+    </div>
+
+    <div class="clear"></div>
+
+
+  </div>
+
+</div>
+<div id="mpartner" class="module">
+
+    <div class="bgmask"></div>
+
+  <div class="content layoutslider">
+
+    <div class="header wow fw" data-wow-delay=".1s">
+<php>$rs=get_one('name,description','portal_category','id',16,'','');</php>
+      <p class="title">{$rs.name}</p>
+            <p class="subtitle">{$rs.description}</p>
+
+      </div>
+
+    <div class="module-content fw">
+
+      <div class="wrapper">
+
+        <ul class="content_list" data-options-ease="ease-out" data-options-speed="1" data-options-auto="1" data-options-pause="5">
+<php>
+                    $where=[
+                    'post.create_time'=>['egt',0]
+                    ];
+                    $p=0;$t=0;
+              </php>     
+       <portal:articles item="vo" where="$where" order="post.published_time DESC"
+                                 relation="categories"
+                                 categoryIds="16"
+                                 returnVarName="articles_data">
+                                 <in name="p" value="0,8,16">
+                    <li id="partneritem_{$p}" class="wow">
+</in>
+                    <a title="{$vo.post_title}"  target="_blank" >
+          <p class="par_img"><img src="{:cmf_get_image_url($vo.more.thumbnail)}" alt="{$vo.post_title}"/></p>
+
+          </a>
+<php>$p++;</php>
+ <in name="p" value="8,16">         
+          </li></in>
+</portal:articles>
+            </ul>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<include file="public@btnav"/>
+</div></div><include file="public@footer"/><script>
+var at=0;
+$(function () {
+$("#mslider").height($(window).width()*0.34);
+$(".nav-a:eq(0)").addClass("active");
+$(".navitem:eq(0)").addClass("active");
+
+var h=$(window).height()-94;
+var h2=$(window).height()-93;
+$('#vd').height(h);
+$('.more a').click(function () {
+            $('html, body').animate({
+                scrollTop: h2
+            }, 1000);
+        });
+})</script></body></html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+ <title>移动端{$site_info.site_name|default=''}</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="keywords" content="{$site_info.site_seo_keywords|default=''}"/>
+    <meta name="description" content="{$site_info.site_seo_description|default=''}">
+<include file="public@head"/>
+
+</head><body><div id="xactive" class="hide">{$article.post_title}</div><div id="sitecontent" class="transform"><include file="public@nav"/>
+
+<div class="scrollView"><div class="npagePage"><div class="content plr10"><div id="servicepost"><div class="header"><p class="title">{$article.post_title}</p></div>
+
+
+<div class="postbody" >{$article.post_content}</div>
+
+</div></div></div></div>
+<include file="public@footer"/>
+</div>
+<include file="public@scripts"/>
+<script>
+$(function(){
+	xactive=$("#xactive").text();
+	$("#"+xactive).addClass("active");
+	//$("#"+xactive).parent().show();
+	$("#"+xactive).parent().height("100%");
+	tx=$("#"+xactive).attr("data-class");
+	$("#"+tx).addClass("active");
+	$("#"+tx).parent().addClass("active");
+
+	});</script></body></html>
+

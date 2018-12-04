@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{$page.post_title}</title>
+    <meta name="keywords" content="{$page.post_keywords}"/>
+    <meta name="description" content="{$page.post_excerpt}">
+    <include file="public@head"/>
+    <hook name="before_head_end"/>
+</head>
+<body >
+<include file="public@nav"/>
+<div id="neibanner"><img src="{:cmf_get_image_url($page.more.thumbnail)}"></div>
+
+<div class="container mtop_1" style="padding-bottom:50px">
+
+    <div class="row">
+    <div class="col-md-3 nocol x992">
+      <div id="neititle"> {$page.post_title} · Sign Up </div>
+      <div id="neimenu">
+<a tit="{$page.post_title}">{$page.post_title}<i class="fa fa-caret-right" style="margin-left:50%;"></i></a>
+        </div>
+    </div>
+    <div class="col-md-9 nocol x992" >
+      <div id="mianbao">您的位置：<a href="/">首页</a> - <a>{$page.post_title}</a></div>
+    </div>
+        <div class="col-md-9 nocol">
+            <div class="ainfo" >
+              <h2 >{$page.post_title}</h2>
+                <hr>
+                <div id="res" style="display:none; margin-top:20px;">
+                <h2>报名成功。</h2>
+                </div>
+            <form class="layui-form layui-form-pane" action="/portal/index/baoming">
+  <div class="layui-form-item">
+    <label class="layui-form-label">* 姓名</label>
+    <div class="layui-input-inline">
+      <input type="text" name="name" maxlength="20" required  lay-verify="required"  autocomplete="off" class="layui-input">
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">* 性别</label>
+    <div class="layui-input-inline">
+      <input type="radio" name="sex" value="男" title="男">
+      <input type="radio" name="sex" value="女" title="女" checked>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">* 身份证</label>
+    <div class="layui-input-inline">
+      <input type="text" name="sfcode" required  lay-verify="required|identity"  autocomplete="off" class="layui-input">
+    </div>
+  </div>
+    <div class="layui-form-item">
+    <label class="layui-form-label">* 文化程度</label>
+    <div class="layui-input-inline">
+      <select name="wenhua" lay-verify="required">
+        <option value=""></option>
+        <option value="中专/中职">中专/中职</option>
+        <option value="高中">高中</option>
+        <option value="大专">大专</option>
+        <option value="本科">本科</option>
+      </select>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">* 家庭电话</label>
+    <div class="layui-input-inline" >
+      <input type="text" name="tel" required  lay-verify="required|number"  maxlength="20"  autocomplete="off" class="layui-input" >
+    </div>
+
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">* 手机</label>
+    <div class="layui-input-inline" >
+      <input type="text" name="mobile" required  lay-verify="required|phone"  autocomplete="off" class="layui-input" >
+    </div>
+
+  </div>
+  
+    <div class="layui-form-item">
+    <label class="layui-form-label">* 通讯地址</label>
+    <div class="layui-input-inline" >
+      <input type="text" name="addr" required  maxlength="50"  lay-verify="required"  autocomplete="off" class="layui-input" >
+    </div>
+
+  </div>
+<div class="layui-form-item">
+    <label class="layui-form-label">QQ</label>
+    <div class="layui-input-inline" >
+      <input type="text" name="qq"  maxlength="20"   autocomplete="off" class="layui-input" >
+    </div>
+
+  </div>
+    <div class="layui-form-item">
+    <label class="layui-form-label">民族</label>
+    <div class="layui-input-inline">
+      <input type="text" name="minzu" maxlength="20"  autocomplete="off" class="layui-input">
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">籍贯</label>
+    <div class="layui-input-inline">
+
+                    <select name="provid" id="provid" lay-filter="provid">
+                        <option value="">请选择省</option>
+                    </select>
+                    <input type="hidden" name="prov" id="prov" >
+                </div>
+
+                <div class="layui-input-inline">
+<input type="hidden" name="city" id="city" >
+                    <select name="cityid" id="cityid" lay-filter="cityid">
+
+                        <option value="">请选择市</option>
+
+                    </select>
+
+                </div>
+
+                <div class="layui-input-inline hide">
+
+                    <select name="areaid" id="areaid" lay-filter="areaid">
+
+                        <option value="">请选择县/区</option>
+
+                    </select>
+
+                </div>
+
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">政治面貌</label>
+    <div class="layui-input-inline">
+      <input type="text" name="mianmao"  maxlength="20" autocomplete="off" class="layui-input">
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">出生日期</label>
+    <div class="layui-input-inline" >
+      <input type="text" name="shengri"  maxlength="20"  autocomplete="off" class="layui-input" id="shengri">
+    </div>
+
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">身体状况</label>
+    <div class="layui-input-inline" >
+      <input type="text" name="shenti"  maxlength="20"  autocomplete="off" class="layui-input" >
+    </div>
+
+  </div>
+<hr>
+  <div class="layui-form-item">
+    <label class="layui-form-label">* 报考专业</label>
+    <div class="layui-input-inline">
+      <select name="zhuanye" lay-verify="required">
+        <option value=""></option>
+        <portal:articles limit="28" order="post.create_time DESC" categoryIds="10">
+        <option value="{$vo.post_title}">{$vo.post_title}</option></portal:articles>
+      </select>
+    </div>
+  </div>
+
+
+    <div class="layui-form-item">
+    <label class="layui-form-label">* 毕业学校</label>
+    <div class="layui-input-inline" >
+      <input type="text" name="xuexiao" maxlength="20"  required  lay-verify="required"  autocomplete="off" class="layui-input" >
+    </div>
+
+  </div>
+   
+    <div class="layui-form-item">
+    <label class="layui-form-label">* 毕业时间</label>
+    <div class="layui-input-inline" >
+      <input type="text" name="biye" required  lay-verify="required"  autocomplete="off" class="layui-input" id="biye">
+    </div>
+
+  </div>
+  <div class="layui-form-item">
+    <label class=" " style="text-align:left; ">是否接受专业调剂</label>
+    
+      <input type="radio" name="tiao" value="是" title="是" checked>
+      <input type="radio" name="tiao" value="否" title="否" >
+    <div class=""></div>
+  </div><hr>
+  <div class="layui-form-item">
+  
+    <div class="layui-input-inline">
+    
+<button class=" btn btn-primary" lay-submit lay-filter="formsub" style="width:150px;">立即提交</button>  <button type="reset" class="btn" style="display:none;">重置</button></div>
+  </div>
+</form></div>
+          
+        </div>
+    </div>
+
+</div>
+<include file="public@footer"/>
+
+<include file="public@scripts"/>
+<script src="__TMPL__/public/assets/js/data.js"></script><script src="__TMPL__/public/assets/js/province.js"></script>
+
+<script> var at=4;
+
+
+$("#neimenu").children("a").each(function(i) {
+    tit="{$page.post_title}";
+	if(tit==$(this).attr("tit")){pt=i;
+	$(this).addClass("ing");
+	}
+});
+$("#neimenu").children("a").mouseover(function(){
+	$("#neimenu").children("a").removeClass("ing");
+	$(this).addClass("ing");
+	})
+$("#neimenu").children("a").mouseout(function(){
+	$(this).removeClass("ing");
+	console.log(pt);
+	$("#neimenu").children("a:eq("+pt+")").addClass("ing");
+	
+	})
+	layui.use('laydate', function(){
+  var laydate = layui.laydate;
+  
+  //执行一个laydate实例
+  laydate.render({
+    elem: '#shengri'
+	//,type: 'year' //指定元素
+  });
+  laydate.render({
+    elem: '#biye'
+	//,type: 'year' //指定元素
+  });
+
+});   
+
+</script>
+<hook name="before_body_end"/>
+</body>
+</html>

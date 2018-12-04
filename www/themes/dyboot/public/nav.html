@@ -1,0 +1,27 @@
+
+
+<div id="header" >
+
+   <div class="content"><a href="/" id="logo"><img src="__TMPL__/public/assets/images/toplogo.jpg"  /></a>
+    <ul id="nav">
+    <php>$nav=get_nav(1,0);</php>
+<volist name="nav" id="item">
+ <php>$subnav=get_nav(1,$item["id"]); </php> 
+
+   <neq name="subnav" value="x">
+  <li class="navitem"><a class="nav-a" id="{$item.name}"  href="{$item.href|default='javascript:'}" target=""><span data-title="{$item.name}">{$item.name}</span><i class="fa fa-angle-down"></i></a><ul class="sub_nav">
+                    <volist name="subnav" id="zitem"><li><a href="{$zitem.href|default=''}" target="_self" ><span data-title="{$zitem.name}" id="{$zitem.name}" data-class="{$item.name}">{$zitem.name}</span><i class="fa fa-angle-right"></i></a></li></volist>
+                  </ul>
+        </li>
+     <else /><li class="navitem"><a class="nav-a" id="{$item.name}" href="{$item.href|default=''}" target="_self"><span  data-title="{$item.name}">{$item.name}</span></a></li>
+  </neq></volist>
+          </ul>
+
+    <div class="clear"></div>
+
+  </div>
+
+    <a id="headSHBtn" href="javascript:;"><i class="fa fa-bars"></i></a>
+
+</div>
+

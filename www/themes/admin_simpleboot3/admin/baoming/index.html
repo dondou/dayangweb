@@ -1,0 +1,53 @@
+<include file="public@header" />
+</head>
+<body>
+	<div class="wrap js-check-wrap">
+		<ul class="nav nav-tabs">
+			<li class="active"><a href="{:url('Baoming/index')}">报名列表</a></li>
+		</ul>
+		<table class="table table-hover table-bordered margin-top-20">
+			<thead>
+				<tr>
+					<th>姓名</th>
+					<th>性别</th>
+					<th>身份证</th>
+					<th>专业</th>
+					<th>毕业学校</th>
+					<th>毕业时间</th>
+					<th>文化程度</th>
+					<th>家庭电话</th>
+					<th>手机</th>
+					<th>通讯地址</th>
+					
+					<th >{:lang('ACTIONS')}</th>
+				</tr>
+			</thead>
+			<tbody>
+				<php>
+
+				</php>
+				<foreach name="luqus" item="vo">
+				<tr>
+					<td height="20"> <a href="{:url('Baoming/edit',array('id'=>$vo['id']))}" >{$vo.name}</a></td>
+					<td>{$vo.sex}</td>
+					<td>{$vo.sfcode}</td>
+					<td>{$vo.zhuanye}</td>
+					<td>{$vo.xuexiao}</td>
+					<td>{$vo.biye}</td>
+					<td>{$vo.wenhua}</td>
+					<td>{$vo.tel}</td>
+					<td>{$vo.mobile}</td>
+					<td>{$vo.addr}</td>
+					<td>
+                        <a href="{:url('Baoming/edit',array('id'=>$vo['id']))}" style="display:none;">{:lang('EDIT')}</a>
+                        <a href="{:url('Baoming/delete',array('id'=>$vo['id']))}" class="js-ajax-delete">{:lang('DELETE')}</a>
+                    </td>
+				</tr>
+				</foreach>
+			</tbody>
+		</table>
+
+	</div>
+	<script src="__STATIC__/js/admin.js"></script>
+</body>
+</html>

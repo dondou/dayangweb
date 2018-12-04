@@ -1,0 +1,132 @@
+<include file="public@header"/>
+</head>
+<style>.mtx{ padding-top:8px;}
+</style>
+<body>
+	<div class="wrap">
+		<ul class="nav nav-tabs">
+			<li><a href="{:url('Baoming/index')}">报名列表</a></li>
+			<li class="active"><a>记录详情</a></li>
+		</ul>
+		<form method="post" class="form-horizontal js-ajax-form margin-top-20" action="{:url('Baoming/editPost')}">
+		  <div class="form-group">
+            <label for="input-name" class="col-sm-2 control-label">姓名<span class="form-required">*</span></label>
+            <div class="col-md-6 col-sm-10 mtx">
+          {$result.name}            </div>
+        </div>
+        <div class="form-group">
+            <label for="input-name" class="col-sm-2 control-label">性别<span class="form-required">*</span></label>
+            <div class="col-md-6 col-sm-10 mtx">
+          {$result.sex}            </div>
+        </div>
+        <div class="form-group">
+            <label for="input-name" class="col-sm-2 control-label">身份证<span class="form-required">*</span></label>
+            <div class="col-md-6 col-sm-10 mtx">
+      {$result.sfcode}          
+          </div>
+        </div>
+        <div class="form-group">
+            <label for="input-name" class="col-sm-2 control-label">文化程度<span class="form-required">*</span></label>
+            <div class="col-md-6 col-sm-10 mtx">
+      {$result.wenhua}          
+          </div>
+        </div>
+        <div class="form-group">
+            <label for="input-name" class="col-sm-2 control-label">家庭电话<span class="form-required">*</span></label>
+            <div class="col-md-6 col-sm-10 mtx">
+      {$result.tel}          
+          </div>
+        </div>
+        <div class="form-group">
+            <label for="input-name" class="col-sm-2 control-label">手机<span class="form-required">*</span></label>
+            <div class="col-md-6 col-sm-10 mtx">
+      {$result.mobile}          
+          </div>
+        </div>
+        <div class="form-group">
+            <label for="input-name" class="col-sm-2 control-label">通讯地址<span class="form-required">*</span></label>
+            <div class="col-md-6 col-sm-10 mtx">
+      {$result.addr}          
+          </div>
+        </div>
+        <div class="form-group">
+            <label for="input-name" class="col-sm-2 control-label">QQ<span class="form-required"></span></label>
+            <div class="col-md-6 col-sm-10 mtx">
+      {$result.qq}          
+          </div>
+        </div>
+        <div class="form-group">
+            <label for="input-name" class="col-sm-2 control-label">民族</label>
+            <div class="col-md-6 col-sm-10 mtx">
+      {$result.minzu}          
+          </div>
+        </div>
+        <div class="form-group">
+            <label for="input-name" class="col-sm-2 control-label">籍贯</label>
+            <div class="col-md-6 col-sm-10 mtx">
+      {$result.prov} - {$result.city}         
+          </div>
+        </div>
+        <div class="form-group">
+            <label for="input-name" class="col-sm-2 control-label">政治面貌</label>
+            <div class="col-md-6 col-sm-10 mtx">
+      {$result.mianmao}  
+          </div>
+        </div>
+        <div class="form-group">
+            <label for="input-name" class="col-sm-2 control-label">出生日期</label>
+            <div class="col-md-6 col-sm-10 mtx">
+      {$result.shengri}        
+          </div>
+        </div>
+        <div class="form-group">
+            <label for="input-name" class="col-sm-2 control-label">身体状况</label>
+            <div class="col-md-6 col-sm-10 mtx">
+      {$result.shenti}     
+          </div>
+        </div>
+        <hr>
+        <div class="form-group">
+            <label for="input-name" class="col-sm-2 control-label">专业<span class="form-required">*</span></label>
+            <div class="col-md-6 col-sm-10 mtx">{$result.zhuanye}</div>
+        </div>
+        <div class="form-group">
+            <label for="input-name" class="col-sm-2 control-label">毕业学校<span class="form-required">*</span></label>
+            <div class="col-md-6 col-sm-10 mtx">
+      {$result.xuexiao}      
+          </div>
+        </div>
+        <div class="form-group">
+            <label for="input-name" class="col-sm-2 control-label">毕业时间<span class="form-required">*</span></label>
+            <div class="col-md-6 col-sm-10 mtx">
+      {$result.biye}      
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="input-remark" class="col-sm-2 control-label">{:lang('DESCRIPTION')}</label>
+            <div class="col-md-6 col-sm-10 mtx">
+                <textarea class="form-control" id="input-remark" name="remark">{$result.remark}</textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10 mtx">
+               <input type="hidden" name="id" value="{$result.id}"> <button type="submit" class="btn btn-primary js-ajax-submit">{:lang('SAVE')}</button>
+                <a class="btn btn-default" href="{:url('Baoming/index')}">{:lang('BACK')}</a>
+            </div>
+        </div>
+    </form>
+	</div>
+	<script src="__STATIC__/js/admin.js"></script>
+    <script>
+layui.use('laydate', function(){
+  var laydate = layui.laydate;
+  
+  //执行一个laydate实例
+  laydate.render({
+    elem: '#totime'
+	//,type: 'year' //指定元素
+  });
+
+});    </script>
+</body>
+</html>

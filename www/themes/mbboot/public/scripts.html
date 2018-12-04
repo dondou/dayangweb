@@ -1,0 +1,28 @@
+<script type="text/javascript" src="__TMPL__/js/jquery-1.11.3.min.js"></script>
+
+	<script type="text/javascript" src="__STATIC__/js/layui/layui.js"></script>
+	<script type="text/javascript" src="__TMPL__/js/wow.min.js"></script>
+	<script>
+		//$("#leftcontrol").animate({left:'-260px'},0);
+$("#openlc").click(function(){
+	if($('body').hasClass('open')){
+		$("body").removeClass("open");}
+	else{
+	$("body").addClass("open");
+		}
+	});
+	$(".more").click(function(){
+		
+		
+		if($(this).parent().parent().hasClass('active')){
+		$(this).parent().parent().removeClass("active");
+		$(this).parent().parent().find("ul").animate({height:'0'},0);
+		}else{
+			$(".navitem").removeClass("active");
+			$(".navitem").find("ul").animate({height:'0'},0);
+		$(this).parent().parent().addClass("active");
+		$(this).parent().parent().find("ul").animate({height:'100%'},0);
+		}
+	})
+	new WOW().init();
+	</script>

@@ -1,0 +1,98 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+ <title>{$category.name},{$site_info.site_name|default=''}</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="keywords" content="{$site_info.site_seo_keywords|default=''}"/>
+    <meta name="description" content="{$site_info.site_seo_description|default=''}">
+<include file="public@head"/>
+
+</head><body >
+
+<div class="bodyMask"> </div>
+<include file="public@nav"/>
+<div id="mindex" data-options-ease="Expo.easeInOut" data-options-speed="1" data-options-sscreen="0"></div><div id="xactive" class="hide">{$category.name}</div>
+
+
+
+<div id="sitecontent">
+
+
+
+<div class="npagePage Pageanli" id="mproject"> <neq name="category.more.thumbnail" value=""><div id="banner">
+
+    <div style="background-image:url({:cmf_get_image_url($category.more.thumbnail)});"></div>
+</div></neq>
+
+    <div class="content">
+<div id="mianbao">您的位置：<a href="/">首页</a><span id="wz"></span> </div>
+    <div class="header" id="plheader">
+
+      <p class="title ">{$category.name}</p>
+
+            <p class="subtitle">{$category.description}</p>
+
+      </div>
+
+        
+
+        <div id="projectlist"  class="module-content">
+        
+      <div class="wrapper" style="text-align:center;">
+
+        
+<php>
+                    $where=[
+                    'post.create_time'=>['egt',0]
+                    ];
+                    $page=[
+                        'list_rows'=>24,
+                        'next'=>'&nbsp;<i class="fa fa-angle-right"></i>',
+                        'prev'=>'<i class="fa fa-angle-left"></i>&nbsp;'
+                    ];
+                    $p=0;
+                </php>     
+       <portal:articles item="vo" where="$where" order="post.update_time ASC" page="$page"
+                                 relation="categories"
+                                 categoryIds="$category.id"
+                                 returnVarName="articles_data">
+                        <a class="listimg"><img src="{:cmf_get_image_url($vo.more.thumbnail)}" /></a>
+  
+<php>$p++;</php>
+</portal:articles>                    
+       </div>
+    </div>
+    <div class="clear"></div>
+    <div id="pages"><page/></div>
+  </div>
+</div>
+
+</div>
+<include file="public@footer"/><include file="public@scripts"/><script>
+$(function(){
+	xactive=$("#xactive").text();
+	$("#"+xactive).addClass("active");
+	tx=$("#"+xactive).attr("data-class");
+	$("#"+tx).addClass("active");
+	$("#"+tx).parent().addClass("active");
+	if(tx){
+$("#wz").html(" - <a>"+tx+"</a> - <a>"+xactive+"</a>");
+$(".wz").html(tx);
+	}else{
+$("#wz").html(" - <a>"+xactive+"</a>");
+$(".wz").html(tx);
+		}
+	znav=$("#"+tx).parent().find("ul").html();
+	$("#category").html(znav);
+	$("#category").find(".fa-angle-right").remove();
+	$("#category").find("#"+xactive).parent().addClass("active");;
+	});
+	
+
+    
+    </script></body></html>

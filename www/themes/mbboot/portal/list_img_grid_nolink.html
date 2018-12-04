@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+ <title>{$category.name}</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="keywords" content="{$site_info.site_seo_keywords|default=''}"/>
+    <meta name="description" content="{$site_info.site_seo_description|default=''}">
+<include file="public@head"/>
+
+</head><body><div id="xactive" class="hide">{$category.name}</div><div id="sitecontent" class="transform"><include file="public@nav"/>
+
+<div class="scrollView"><div class="npagePage">
+  <div class="content">
+<div id="item">{$category.name}</div>
+<div id="projectlist" style="margin-top:40px;">
+
+      <div class="wrapper ">
+  <php>
+                    $where=[
+                    'post.create_time'=>['egt',0]
+                    ];
+                    $page=[
+                        'list_rows'=>9,
+                        'next'=>'&nbsp;<i class="fa fa-angle-right"></i>',
+                        'prev'=>'<i class="fa fa-angle-left"></i>&nbsp;'
+                    ];
+                    $p=0;
+          </php>     
+       <portal:articles item="vo" where="$where" order="post.published_time DESC" page="$page"
+                                 relation="categories"
+                                 categoryIds="$category.id"
+                                 returnVarName="articles_data">
+                <div class="projectitem wow fadeIn"><a href="{:cmf_get_image_url($vo.more.thumbnail)}">
+
+          <div class="project_img"><img src="{:cmf_get_image_url($vo.more.thumbnail)}" class="ximg"/></div>
+<div class="clear"></div>
+          <div class="project_info">
+              <p class="title">{$vo.post_title}</p>
+          </div>
+
+          </a></div>
+<php>$p++;</php>
+</portal:articles>
+</div></div>
+<div class="clear"></div>
+<div id="pages"><page/></div>
+
+</div></div></div>
+<include file="public@footer"/>
+</div>
+<include file="public@scripts"/>
+<script>
+$(function(){
+	xactive=$("#xactive").text();
+	$("#"+xactive).addClass("active");
+	//$("#"+xactive).parent().show();
+	$("#"+xactive).parent().height("100%");
+	tx=$("#"+xactive).attr("data-class");
+	$("#"+tx).addClass("active");
+	$("#"+tx).parent().addClass("active");
+ imgh=$(".ximg").height();
+ $(".ximg").height(imgh);
+	});
+ layui.use('layer', function(){ //独立版的layer无需执行这一句
+  var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句
+
+    $('.projectitemxxx').click(function(){
+     layer.open({
+  type: 1,
+  title: false,
+  shade: 0.8,
+  closeBtn: 0,
+  area: '95%',
+  skin: 'layui-layer-nobg', //没有背景色
+  shadeClose: true,
+  content: $(this).find('.project_img').html()
+});	
+  });
+});   
+    
+    </script></body></html>
+

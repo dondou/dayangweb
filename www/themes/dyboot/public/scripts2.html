@@ -1,0 +1,79 @@
+<!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="__TMPL__/public/assets/simpleboot3/bootstrap/js/bootstrap.min.js"></script>
+    <script src="__TMPL__/public/assets/js/swiper.js"></script>
+    <script type="text/javascript" src="__STATIC__/js/layui/layui.js"></script>
+
+	<script>
+	layui.use('layer', function(){
+  var layer = layui.layer;
+  layer.config({
+  skin: 'demo-class'
+});
+  
+});
+	layui.use('element', function(){
+  var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
+  
+  //监听导航点击
+  element.on('nav(demo)', function(elem){
+    //console.log(elem)
+    //layer.msg(elem.text());
+  });
+});
+	$(function(){
+$("#mobilenav").find("div:eq(0)").click(function(){
+		aw=$(".layui-nav-tree").width();
+		aw=aw>10?0:'100%';
+		$(".layui-nav-tree").width(aw);
+		});
+		$("#mobilenav").children("div:eq(1)").click(function(){ window.location.href="/";})
+		$("#mobilenav").children("div:eq(2)").click(function(){ window.location.href="/contact";})
+$(".headmenudiv:eq("+at+")").addClass("headmenudiving");
+$(".headmenudiv").mouseover(function(){
+	$(".headmenudiv").removeClass("headmenudiving");
+	$(this).addClass("headmenudiving");
+	//$(this).children(".submenu").show();
+	})
+$(".headmenudiv").mouseout(function(){
+	$(".headmenudiv").removeClass("headmenudiving");
+$(".headmenudiv:eq("+at+")").addClass("headmenudiving");
+
+	})
+        ;(function($){
+			$.fn.totop=function(opt){
+				var scrolling=false;
+				return this.each(function(){
+					var $this=$(this);
+					$(window).scroll(function(){
+						if(!scrolling){
+							var sd=$(window).scrollTop();
+							if(sd>100){
+								$this.fadeIn();
+							}else{
+								$this.fadeOut();
+							}
+						}
+					});
+					
+					$this.click(function(){
+						scrolling=true;
+						$('html, body').animate({
+							scrollTop : 0
+						}, 500,function(){
+							scrolling=false;
+							$this.fadeOut();
+						});
+					});
+				});
+			};
+		})(jQuery); 
+		
+		$("#backtotop").totop();
+	});
+	
+	
+	//jQuery.each(jQuery("img"), function (i, n) { jQuery(n).error(function () { n.src = '__TMPL__/public/assets/images/default_tupian4.png'; }); n.src = n.src; });
+	</script>
+<div style="display:none;"><script src="https://s13.cnzz.com/z_stat.php?id=1274368053&web_id=1274368053" language="JavaScript"></script></div>

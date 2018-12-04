@@ -1,0 +1,54 @@
+<include file="public@header" />
+</head>
+<body>
+	<div class="wrap js-check-wrap">
+		<ul class="nav nav-tabs">
+			<li class="active"><a href="{:url('luqu/index')}">录取列表</a></li>
+			<li><a href="{:url('luqu/add')}">添加记录</a></li>
+		</ul>
+		<table class="table table-hover table-bordered margin-top-20">
+			<thead>
+				<tr>
+					<th>学号</th>
+					<th>姓名</th>
+					<th>身份证</th>
+					<th>专业</th>
+					<th>邮件号</th>
+					<th>邮寄地址</th>
+					<th>联系人</th>
+					<th>联系电话</th>
+					<th>报到地点</th>
+					<th>报到时间</th>
+					
+					<th >{:lang('ACTIONS')}</th>
+				</tr>
+			</thead>
+			<tbody>
+				<php>
+
+				</php>
+				<foreach name="luqus" item="vo">
+				<tr>
+					<td>{$vo.xueid}</td>
+					<td>{$vo.name}</td>
+					<td>{$vo.sfcode}</td>
+					<td>{$vo.zhuanye}</td>
+					<td>{$vo.postid}</td>
+					<td>{$vo.postaddr}</td>
+					<td>{$vo.contacter}</td>
+					<td>{$vo.phone}</td>
+					<td>{$vo.toaddr}</td>
+					<td>{$vo.totime}</td>
+					<td>
+                        <a href="{:url('luqu/edit',array('id'=>$vo['id']))}">{:lang('EDIT')}</a>
+                        <a href="{:url('luqu/delete',array('id'=>$vo['id']))}" class="js-ajax-delete">{:lang('DELETE')}</a>
+                    </td>
+				</tr>
+				</foreach>
+			</tbody>
+		</table>
+
+	</div>
+	<script src="__STATIC__/js/admin.js"></script>
+</body>
+</html>
